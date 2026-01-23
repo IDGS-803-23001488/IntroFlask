@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -8,7 +8,73 @@ def home():
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    titulo = "IDGS803-FLASK"
+    lista_parametros = ['pedro','mario','omar','juan']
+    return render_template(
+        'index.html', 
+        titulo = titulo,
+        lista_parametros = lista_parametros
+    )
+    
+@app.route('/alumnos')
+def alumnos():
+    return render_template(
+        'alumnos.html'
+        
+    )
+
+@app.route('/operaBas', methods=['GET','POST'])
+def operaBas():
+    
+    if request.method == "POST":
+        n1 = request.form.get("n1")
+        n2 = request.form.get("n2")
+        tipo = request.form.get("operacion")
+        resultado = 0
+        if(tipo == "Sumar"): 
+            resultado = float(n1) + float(n2)
+        if(tipo == "Restar"): 
+            resultado = float(n1) - float(n2)
+        if(tipo == "Multiplicar"): 
+            resultado = float(n1) * float(n2)
+        if(tipo == "Dividir"): 
+            resultado = float(n1) / float(n2)
+        return render_template(
+            'operaBas.html',
+            resultado = resultado,
+            n1 = n1,
+            n2 = n2,
+            operacion = tipo
+        )
+    else:
+        return render_template(
+            'operaBas.html'
+            
+        )
+
+@app.route('/resultado', methods=['GET','POST'])
+def resultado():
+    n1 = request.form.get("n1")
+    n2 = request.form.get("n2")
+    tipo = request.form.get("operacion")
+    resultado = 0
+    if(tipo == "Sumar"): 
+        resultado = float(n1) + float(n2)
+    if(tipo == "Restar"): 
+        resultado = float(n1) - float(n2)
+    if(tipo == "Multiplicar"): 
+        resultado = float(n1) * float(n2)
+    if(tipo == "Dividir"): 
+        resultado = float(n1) / float(n2)
+    
+    return f"<h1> EL RESULTADO ES: {resultado}</h1>"
+
+@app.route('/usuarios')
+def usuarios():
+    return render_template(
+        'usuarios.html'
+        
+    )
 
 @app.route('/hola')
 def hola():
