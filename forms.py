@@ -11,23 +11,23 @@ class UserForms(Form):
             validators.NumberRange(min=2,max=100,message="Ingresa un valor valido")
         ]
     )
-    nombre = StringField('Nombre'
+    nombre = StringField('Nombre',
         [
             validators.DataRequired("Este campo es requerido"),
             validators.length(min=4,max=10,message="Ingresa un valor valido")
         ]
     )
-    apaterno = StringField('A. Parterno'
+    apaterno = StringField('A. Parterno',
         [
             validators.DataRequired("Este campo es requerido")
         ]
     )
-    amaterno = StringField('A. Materno'
+    amaterno = StringField('A. Materno',
         [
             validators.DataRequired("Este campo es requerido")
         ]
     )
-    email = EmailField('Email'
+    email = EmailField('Email',
         [
             validators.Email("Ingrese un correo valido")
         ]
